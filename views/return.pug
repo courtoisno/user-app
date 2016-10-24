@@ -1,0 +1,12 @@
+html
+	head
+	body
+		H1 Results of your mates search
+
+		if unicorn === undefined || unicorn.length == 0 
+			p Oops, there's no matching results !
+
+		else 
+			each thing in unicorn
+				li.thing #{thing.firstname} #{thing.lastname} : #{thing.email}
+		
