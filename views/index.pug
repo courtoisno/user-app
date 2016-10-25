@@ -4,9 +4,16 @@ html
 		link(rel='stylesheet', href='styles.css' type='text/css')
 	body
 		h1(id="title") Hey! It's a list : 
+		div(class="menubar")
+			li
+				a(class='S1')(href ='./search') Search
+			li
+				a(class='S2')(href ='./newusers') Subsribe
+
 		p(id="liste")
 		ul(class="text")
 			each something in data
-				li.something #{something.firstname} #{something.lastname} : #{something.email}
+				li.something #{something.firstname} #{something.lastname} : 
+					i #{something.email}
 
 

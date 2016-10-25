@@ -1,12 +1,19 @@
 html
 	head
+		link(rel='stylesheet', href='styles.css' type='text/css')
 	body
-		H1 Results of your mates search
+		H1 Matching results
+		div(class="menubar")
+			li
+				a(class='S1')(href ='./search') Search
+			li
+				a(class='S2')(href ='./newusers') Subsribe
 
 		if unicorn === undefined || unicorn.length == 0 
-			p Oops, there's no matching results !
+			p(id="oops") Oops, there's no matching results !
 
 		else 
 			each thing in unicorn
-				li.thing #{thing.firstname} #{thing.lastname} : #{thing.email}
+				li.thing #{thing.firstname} #{thing.lastname} : 
+					i #{thing.email}
 		

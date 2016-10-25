@@ -23,7 +23,7 @@ app.get('/index', (request, response ) => {
 			let parsedData = JSON.parse( data )
 		console.log( parsedData )
 		parsedData.sort( function( a, b ) {
-			return a.lastname < b.lastname ? -1 : a.lastname > b.lastname ? 1 : 0;
+			return a.lastname.toUpperCase() < b.lastname.toUpperCase() ? -1 : a.lastname.toUpperCase() > b.lastname.toUpperCase() ? 1 : 0;
 		});
 		//NOW parsed data will exist because in the loop ! SCOPE !!!
 		// THIS STEP DOESNT CHANGE ANYTHING !! Only on backend -> it just give access to our data on index

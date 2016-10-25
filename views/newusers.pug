@@ -1,14 +1,22 @@
 html
 	head
+		link(rel='stylesheet', href='styles.css' type='text/css')
 	body
-		h1 Fill the fields to be a Mate!
-		form(method="POST" action="/addusers")
-			p Your firstname:   
-				input(name="firstname" type="text")
-			p Your lastname:   
-				input(name="lastname" type="text")
-			p Your email:
-				input(name="email" type="text")
+		h1 Be a member!
+		div(class="menubar")
+			li
+				a(class='S1')(href ='./search') Search
+			li
+				a(class='S2')(href ='./newusers') Subsribe
 
-			p
-				input(type="submit" value="submit!")
+		div(class='form2')
+			form(method="POST" action="/addusers")
+				p Your firstname:   
+					input(name="firstname" type="text")
+				p Your lastname:   
+					input(name="lastname" type="text")
+				p Your email: 
+					input(id="email")(name="email" type="text")
+
+				p
+					input(class="button2")(type="submit" value="submit!")

@@ -1,14 +1,23 @@
 html
 	head
+		link(rel='stylesheet', href='styles.css' type='text/css')
+		script(type='text/javascript' src='static/mainfe.js')
 	body
-		h1 Who are you looking for ? Find your mate here ! 
-		form(method="POST" action="/return")
-			p Firstname:   
-				input(name="firstname" type="text")
-			p Lastname:   
-				input(name="lastname" type="text")
-			p
-				input(type="submit" value="FIND HERE!")
+		h1 Search here ! 
+		div(class="menubar")
+			li
+				a(class='S1')(href ='./search') Search
+			li
+				a(class='S2')(href ='./newusers') Subsribe
+
+		div(class='form1')
+			form(method="POST" action="/return")
+				p Firstname: 
+					input(name="firstname" type="text")
+				p Lastname:  
+					input(name="lastname" type="text")
+				p
+					input(class="button")(type="submit" value="Search!")
 
 
 
