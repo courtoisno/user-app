@@ -1,25 +1,28 @@
 html
 	head
-		link(rel='stylesheet', href='styles.css' type='text/css')
-		script(type='text/javascript' src='static/mainfe.js')
+		link(rel='stylesheet' href='styles.css' type='text/css')
+		link(rel='stylesheet' href='jquery-ui.min.css' type="text/css")
 	body
 		h1 Search here ! 
 		div(class="menubar")
 			li
-				a(class='S1')(href ='./search') Search
+				a(class='S1' href ='./search') Search
 			li
-				a(class='S2')(href ='./newusers') Subsribe
+				a(class='S2' href ='./newusers') Subsribe
 
 		div(class='form1')
-			form(method="POST" action="/return")
+			form(id="formjs" autocomplete="off")
 				p Firstname: 
-					input(name="firstname" type="text")
+					input#firstinput(name="firstname" type="text")
 				p Lastname:  
-					input(name="lastname" type="text")
+					input#lastinput(name="lastname" type="text")
 				p
-					input(class="button")(type="submit" value="Search!")
+					input#button(class="button" type="submit" value="Search!")
+		div#resultat
 
-
+script(src="jquery-3.1.1.min.js")
+script(src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   crossorigin="anonymous")
+script(type='text/javascript' src='mainfe.js')
 
 
 

@@ -52,30 +52,94 @@ app.get('/search', (request, response) => {
 })
 
 
-app.post ('/return', (request, response) =>{
-	console.log( request.body )
-	fs.readFile(__dirname + '/users.json', (error, data) => {
-		if (error) throw error
-		let parsedData = JSON.parse( data )
-		console.log( parsedData )
-		let searchResults = []
-		var userFirst = request.body.firstname;
-		var userLast = request.body.lastname;
 
+
+
+app.post ('/search', (request, response) =>{
+	// Print the POST data
+	console.log('Data posted:')
+	console.log( request.body )
+	// Read the json file
+	fs.readFile(__dirname + '/users.json', (error, data) => {
+		// Check if there is an error
+		if (error) throw error
+		// Change data from file to an object
+		let parsedData = JSON.parse( data )
+		// Console the object for debugging
+		console.log( 'The json file has length: ' + parsedData.length )
+		// Make empty array to contain the search results
+		let searchResults = []
+		// Store the requests in shorter variables
+		var userFirst = request.body.firstname.toLowerCase() || undefined;
+		var userLast = request.body.lastname.toLowerCase() || undefined;
+
+		// Loop over the json file data
 		for (var i =0; i < parsedData.length ; i++) {
-			if(parsedData[i].firstname === userFirst || parsedData[i].lastname === userLast) {
-				console.log('loop works')
-				searchResults.push(parsedData[i]) 
+			// Check if the user data matches any users from the JSON
+			/////NOW INDEXOF to check n noemie nora blabla -> 
+			// If i type a -> if it's a part of one of the string in my arrray (check)
+			//if(parsedData[i].firstname === userFirst || parsedData[i].lastname === userLast) {
+				//console.log('loop works')
+				// Add result to the array
+				//searchResults.push(parsedData[i]) 
+			//}
+		//}
+
+			if ( parsedData[i].firstname.toLowerCase().indexOf( userFirst ) != -1 || parsedData[i].lastname.toLowerCase().indexOf( userLast ) != -1 ) {
+				searchResults.push( parsedData[i].firstname +  ' ' + parsedData[i].lastname )
 			}
-			
-			else{ 
-				console.log("no finding match")}
 		}
-		// THIS STEP DOESNT CHANGE ANYTHING !! Only on backend -> it just give access to our data on return
-		response.render('return', {unicorn: searchResults})
-		console.log(searchResults)
+
+		// Render the results on the return.pug view
+			// response.render('return', {unicorn: searchResults})
+
+			// Send the result object instead of rendering a page
+			response.send( searchResults )
+
+			console.log( 'Amount of results ' + searchResults.length )
 	} )
 } )
+
+app.post ('/search', (request, response) => {
+	// Print the POST data
+	console.log('Data posted:')
+	console.log( request.body )
+	// Read the json file
+	fs.readFile(__dirname + '/users.json', (error, data) => {
+		// Check if there is an error
+		if (error) throw error
+		// Change data from file to an object
+		let parsedData = JSON.parse( data )
+		// Console the object for debugging
+		console.log( 'The json file has length: ' + parsedData.length )
+		// Make empty array to contain the search results
+		let searchResults = []
+		// Store the requests in shorter variables
+		var userFirst = request.body.firstname.toLowerCase()
+		var userLast = request.body.lastname.toLowerCase() 
+		// Loop over the json file Data
+		for (var i =0; i < parsedData.length ; i++) {
+			
+				if (parsedData[i].firstname.toLowerCase() == userFirst || parsedData[i].lastname.toLowerCase() == userLast) {
+					console.log ('it workdsss')
+					searchResults.push(parsedData[i].firstname +  ' ' + parsedData[i].lastname)
+				}
+
+			//if ( parsedData[i].firstname.toLowerCase().indexOf( userFirst ) != -1 || parsedData[i].lastname.toLowerCase().indexOf( userLast ) != -1 ) {
+				//searchResults.push( parsedData[i].firstname +  ' ' + parsedData[i].lastname )
+			//}
+		}
+			response.send( searchResults )
+
+			console.log( 'Amount of results ' + searchResults.length )
+
+
+	} )
+} )
+
+
+
+
 
 
 
@@ -88,11 +152,8 @@ app.get('/newusers', (request, response) => {
 		console.log( parsedData )
 		response.render('newusers', {data: parsedData})
 
-	})
-})
-
-
-
+	} )
+} )
 
 app.post ('/addusers', (request, response) => {
 	console.log('almost a page!')
