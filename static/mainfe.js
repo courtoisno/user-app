@@ -1,22 +1,18 @@
+//Do the code when document ready
 $(document).ready(function() {
 
-	//complete this when doc ready
+	//set variable = date now() to be able to compare it later in a if else statement (to check the time)
 	var prevTime = Date.now()
 	// Trigger when key is pressed in the form
 	$( "#formjs" ).keyup(function() {
 
-		// constances (overwrite when key up, for comparaison)
+		// set other variable (it will overwrite the other one above)
 		var nowTime = Date.now()
-
-
-		// Debug console
+		// Debug console - to see if it works
 		console.log( "test key press" );
-  		// Do a post request with the value of the input
-
-
-  		//wrapper function
+  		//wrapper function that takes in the whole post ajax request.
   		function timeAjax() {
-
+  		// Do a post request with the value of the inputs
   			$.post('/search', {firstname: $('#firstinput').val(), lastname: $('#lastinput').val()}, function(data, status){
   			console.log(data)
 //  			$('#firstinput').html('')
@@ -24,6 +20,8 @@ $(document).ready(function() {
   				//$('#firstinput').append( data[i].firstname + ' ' + data[i].lastname + '<br>')
 
   			//}
+
+  			// Set the autocomplete functions that allows to have a dropdown bar/menu in the field to be filled in
   			$("#firstinput").autocomplete ({
   					source: data});
   			$("#lastinput").autocomplete ({
@@ -31,13 +29,16 @@ $(document).ready(function() {
 
   			})
   		}
-
+  		// If else statement that will check if the difference between the second time and the first is equal or smaller than 300 miliseconds
  		if ((nowTime - prevTime ) <= 300 ) {
+ 			//If it is, then call the function to run it and assign prevTIme the value of the second time.
  			timeAjax() 
  			prevTime = nowTime
+ 			//Else, we want to call the setTimeout function and assign it 2 parameters (the function timeAjax and 300milisec)
  		} else {
  			//No brackets because we just defining a function and brackets if we want it to run. HEre we just implement it.
- 			setTimeout(timeAjax, 3000)
+ 			setTimeout(timeAjax, 300)
+ 			//assign to prev time the value of the second -> that way it will always run on a 300milisecond
  			prevTime = nowTime
 
  		}
@@ -60,14 +61,17 @@ $(document).ready(function() {
 
 
 	
-
+	// when click on the button, it will add my data from my json file to a div under the search bar. -> dynamic
 	$("#button").click(function(event){
 		event.preventDefault()
 
-
+		// Ajax post request in my search route - with 3 parameters : values entered to 'firstname' and 'lastname' and a callback function
 		$.post('/search', {firstname: $('#firstinput').val(), lastname: $('#lastinput').val() } , function (data, status) {
+				//clean the entry everytime
 				$('#resultat').empty()
+				//Create a loop that will count from 0 till the end of my array
 			for (var i = 0; i < data.length; i++) {
+				//add the data to my div
   				$('#resultat').append( data[i] + '<br>')
 
   			}

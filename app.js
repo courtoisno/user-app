@@ -142,14 +142,19 @@ app.post ('/search', (request, response) => {
 
 
 
-
+//Get request on the newusers route with two parameters
 
 app.get('/newusers', (request, response) => {
+	//debug
 	console.log('almost a users page!')
+	//read the file json and parse it.
 	fs.readFile(__dirname + '/users.json', (error, data) => {
 		if (error) throw error
+			//create a variable jason parsed
 			let parsedData = JSON.parse( data )
+		// debug	
 		console.log( parsedData )
+		//render the parsed data to my newusers route
 		response.render('newusers', {data: parsedData})
 
 	} )
