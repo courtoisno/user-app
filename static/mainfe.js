@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
 	//set variable = date now() to be able to compare it later in a if else statement (to check the time)
-	var prevTime = Date.now()
+	var prevTime = 0
 	// Trigger when key is pressed in the form
 	$( "#formjs" ).keyup(function() {
 
@@ -30,34 +30,19 @@ $(document).ready(function() {
   			})
   		}
   		// If else statement that will check if the difference between the second time and the first is equal or smaller than 300 miliseconds
- 		if ((nowTime - prevTime ) <= 300 ) {
+ 		if ((nowTime - prevTime ) >= 300 ) {
  			//If it is, then call the function to run it and assign prevTIme the value of the second time.
  			timeAjax() 
- 			prevTime = nowTime
+ 			prevTime = Date.now()
  			//Else, we want to call the setTimeout function and assign it 2 parameters (the function timeAjax and 300milisec)
  		} else {
- 			//No brackets because we just defining a function and brackets if we want it to run. HEre we just implement it.
- 			setTimeout(timeAjax, 300)
- 			//assign to prev time the value of the second -> that way it will always run on a 300milisecond
- 			prevTime = nowTime
+ 			console.log('yay')
 
  		}
 
   		
 
   	})
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	
